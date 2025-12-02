@@ -121,78 +121,64 @@
   /**
    * Initiate Pure Counter
    */
-  // Guarded: only initialize PureCounter if the library is loaded
-  if (typeof PureCounter !== 'undefined') {
-    new PureCounter();
-  }
+  new PureCounter();
 
   /**
    * Animate the skills items on reveal
    */
-  // Animate the skills items on reveal (guarded - Waypoint may be optional)
-  if (typeof Waypoint !== 'undefined') {
-    let skillsAnimation = document.querySelectorAll('.skills-animation');
-    skillsAnimation.forEach((item) => {
-      new Waypoint({
-        element: item,
-        offset: '80%',
-        handler: function(direction) {
-          let progress = item.querySelectorAll('.progress .progress-bar');
-          progress.forEach(el => {
-            el.style.width = el.getAttribute('aria-valuenow') + '%';
-          });
-        }
-      });
-    });
-  }
-
-  /**
-   * Initiate glightbox (guarded)
-   */
-  let glightbox;
-  if (typeof GLightbox !== 'undefined') {
-    glightbox = GLightbox({
-      selector: '.glightbox'
-    });
-  }
-
-  /**
-   * Init isotope layout and filters (guarded)
-   */
-  if (typeof imagesLoaded !== 'undefined' && typeof Isotope !== 'undefined') {
-    document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
-      let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
-      let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
-      let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
-
-      let initIsotope;
-      imagesLoaded(isotopeItem.querySelector('.isotope-container'), function() {
-        initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
-          itemSelector: '.isotope-item',
-          layoutMode: layout,
-          filter: filter,
-          sortBy: sort
+  let skillsAnimation = document.querySelectorAll('.skills-animation');
+  skillsAnimation.forEach((item) => {
+    new Waypoint({
+      element: item,
+      offset: '80%',
+      handler: function(direction) {
+        let progress = item.querySelectorAll('.progress .progress-bar');
+        progress.forEach(el => {
+          el.style.width = el.getAttribute('aria-valuenow') + '%';
         });
-      });
-
-      isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
-        filters.addEventListener('click', function() {
-          const active = isotopeItem.querySelector('.isotope-filters .filter-active');
-          if (active) active.classList.remove('filter-active');
-          this.classList.add('filter-active');
-          if (initIsotope) {
-            initIsotope.arrange({
-              filter: this.getAttribute('data-filter')
-            });
-          }
-          if (typeof aosInit === 'function') {
-            aosInit();
-          }
-        }, false);
-      });
-
+      }
     });
-  }
+  });
+
+  /**
+   * Initiate glightbox
+   */
+  const glightbox = GLightbox({
+    selector: '.glightbox'
+  });
+
+  /**
+   * Init isotope layout and filters
+   */
+  document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
+    let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
+    let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
+    let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
+
+    let initIsotope;
+    imagesLoaded(isotopeItem.querySelector('.isotope-container'), function() {
+      initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
+        itemSelector: '.isotope-item',
+        layoutMode: layout,
+        filter: filter,
+        sortBy: sort
+      });
+    });
+
+    isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
+      filters.addEventListener('click', function() {
+        isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
+        this.classList.add('filter-active');
+        initIsotope.arrange({
+          filter: this.getAttribute('data-filter')
+        });
+        if (typeof aosInit === 'function') {
+          aosInit();
+        }
+      }, false);
+    });
+
+  });
 
   /**
    * Init swiper sliders
