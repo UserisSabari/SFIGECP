@@ -38,321 +38,167 @@
     }
 
     * {
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
+      box-sizing: border-box;
     }
 
+    /* Hero tweaks: dim background image, center text and add CTA */
     #hero {
       position: relative;
       overflow: hidden;
+      min-height: 72vh;
+      display: flex;
+      align-items: center;
     }
 
-    #hero::before {
-      content: '';
+    #hero img {
       position: absolute;
-      top: 0;
-      right: -100px;
-      width: 400px;
-      height: 400px;
-      background: linear-gradient(135deg, var(--primary-red), var(--primary-light));
-      border-radius: 50%;
-      opacity: 0.1;
-      animation: float 6s ease-in-out infinite;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 1;
+      filter: brightness(0.45) saturate(0.95);
+      transform-origin: center;
     }
 
+    /* Decorative soft shapes */
+    #hero::before,
     #hero::after {
       content: '';
       position: absolute;
-      bottom: -50px;
-      left: -150px;
-      width: 300px;
-      height: 300px;
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary-red));
       border-radius: 50%;
       opacity: 0.08;
-      animation: float 8s ease-in-out infinite reverse;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #hero::before {
+      top: -40px;
+      right: -120px;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle at 30% 30%, rgba(220, 38, 38, 0.12), rgba(153, 27, 27, 0.02));
+      animation: float 8s ease-in-out infinite;
+    }
+
+    #hero::after {
+      bottom: -80px;
+      left: -120px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle at 70% 70%, rgba(153, 27, 27, 0.12), rgba(220, 38, 38, 0.02));
+      animation: float 10s ease-in-out infinite reverse;
     }
 
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(20px); }
+      50% { transform: translateY(18px); }
     }
 
-    #unit-committee {
-      background: linear-gradient(135deg, rgba(220, 38, 38, 0.02) 0%, rgba(153, 27, 27, 0.01) 100%);
-      padding: 60px 0;
-    }
-
-    .member-card {
+    .hero .container {
+      position: relative;
+      z-index: 3;
       text-align: center;
-      background: white;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
-      margin-bottom: 20px;
+      color: #fff;
+      padding: 40px 20px;
+      max-width: 900px;
     }
 
-    .member-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 24px rgba(220, 38, 38, 0.15);
-      border-top: 3px solid var(--primary-red);
+    .hero h2 {
+      margin: 0 0 8px 0;
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.45);
     }
 
-    .member-image {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      overflow: hidden;
-      margin: 0 auto 12px;
-      border: 3px solid var(--primary-red);
+    .typed {
+      color: #fff;
+      font-size: 20px;
+      display: inline-block;
+      border-bottom: 2px solid rgba(255,255,255,0.12);
+      padding-bottom: 6px;
     }
 
-    .member-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .member-position {
-      font-size: 0.75rem;
-      color: var(--primary-red);
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 6px;
-    }
-
-    .member-name {
-      font-size: 0.95rem;
-      color: var(--primary-dark);
-      font-weight: bold;
-      margin: 0;
-    }
-
-    #sahayi {
-      background: linear-gradient(135deg, rgba(220, 38, 38, 0.03) 0%, rgba(153, 27, 27, 0.02) 100%);
-      border-top: 4px solid var(--primary-red);
-      position: relative;
-      padding: 60px 0;
-    }
-
-    #sahayi::before {
-      content: '✨ Featured';
-      position: absolute;
-      top: 20px;
-      right: 40px;
-      background: var(--primary-red);
-      color: white;
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    .sahayi-card {
-      border-left: 4px solid var(--primary-red);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
-      cursor: pointer;
-      background: white;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .sahayi-card:hover {
-      box-shadow: 0 12px 24px rgba(220, 38, 38, 0.25);
-      transform: translateY(-8px);
-      border-left-color: var(--primary-dark);
-    }
-
-    .sahayi-card:hover .card-icon {
-      transform: scale(1.1) rotate(5deg);
-      color: var(--primary-dark);
-    }
-
-    .card-icon {
-      font-size: 3rem;
-      transition: all 0.3s ease;
-      color: var(--primary-red);
-    }
-
-    .section-title h2 {
-      position: relative;
-      padding-bottom: 10px;
-      color: #222;
-    }
-
-    .section-title h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 3px;
+    .hero .btn-cta {
+      margin-top: 18px;
       background: linear-gradient(90deg, var(--primary-red), var(--primary-dark));
-      border-radius: 2px;
-    }
-
-    .btn-primary, .btn-danger {
-      background: var(--primary-red);
+      color: #fff;
       border: none;
-      transition: all 0.3s ease;
+      padding: 12px 22px;
+      border-radius: 40px;
+      box-shadow: 0 12px 30px rgba(153,27,27,0.24);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: inline-block;
+      font-weight: 700;
     }
 
-    .btn-primary:hover, .btn-danger:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(220, 38, 38, 0.3);
+    .hero .btn-cta:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(153,27,27,0.28);
     }
 
-    a {
-      color: var(--primary-red);
-      transition: all 0.3s ease;
+    /* Unit committee + cards: slightly more compact */
+    #unit-committee { padding: 48px 0; }
+
+    .member-card { text-align: center; background: var(--surface-color); border-radius: 10px; padding: 18px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+
+    .member-image { width: 92px; height: 92px; border-radius: 50%; overflow: hidden; margin: 0 auto 10px; border: 3px solid var(--primary-red); }
+
+    .member-name { font-size: 0.98rem; color: var(--primary-dark); margin: 0; font-weight: 700; }
+
+    .member-position { font-size: 0.72rem; color: var(--primary-red); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+
+    /* Sahayi cards */
+    .sahayi-card { border-left: 4px solid var(--primary-red); background: var(--surface-color); border-radius: 10px; }
+
+    .card-icon { font-size: 2.6rem; color: var(--primary-red); }
+
+    .section-title h2 { position: relative; padding-bottom: 10px; color: #222; }
+
+    .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 3px; background: linear-gradient(90deg, var(--primary-red), var(--primary-dark)); border-radius: 2px; }
+
+    .btn-primary, .btn-danger { background: var(--primary-red); border: none; }
+
+    .btn-primary:hover, .btn-danger:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+    a { color: var(--primary-red); }
+
+    .section { animation: fadeInUp 0.6s ease-out; }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Header tweaks for clearer logo/profile */
+    #header { border-bottom: 3px solid var(--primary-red); }
+
+    .profile-img img { width: 110px; height: 110px; object-fit: cover; border-radius: 50%; border: 6px solid rgba(0,0,0,0.06); }
+
+    .logo .sitename { font-size: 18px; font-weight: 800; letter-spacing: 0.6px; color: var(--heading-color); margin: 8px 0; }
+
+    /* Icon and interactive tweaks */
+    .navmenu ul li a:hover { color: var(--primary-red); transform: scale(1.03); }
+
+    .icon-box:hover { box-shadow: 0 10px 26px rgba(153,27,27,0.12); transform: translateY(-6px); }
+
+    .cta-banner { background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-dark) 100%); padding: 30px; border-radius: 10px; box-shadow: 0 12px 30px rgba(153,27,27,0.2); }
+
+    .col-lg-20 { flex: 0 0 20%; max-width: 20%; }
+
+    @media (max-width: 1200px) { .col-lg-20 { flex: 0 0 25%; max-width: 25%; } }
+    @media (max-width: 992px)  { .col-lg-20 { flex: 0 0 33.333%; max-width: 33.333%; } }
+    @media (max-width: 768px)  {
+      .col-lg-20 { flex: 0 0 50%; max-width: 50%; }
+      .member-image { width: 80px; height: 80px; }
+      .member-name { font-size: 0.88rem; }
+      .member-position { font-size: 0.72rem; }
+      #hero::before { width: 250px; height: 250px; }
+      #sahayi::before { right: 20px; font-size: 10px; padding: 4px 12px; }
     }
 
-    a:hover {
-      color: var(--primary-dark);
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    .section {
-      animation: fadeInUp 0.6s ease-out;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    #header {
-      border-bottom: 3px solid var(--primary-red);
-      transition: all 0.3s ease;
-    }
-
-    #header.header-scrolled {
-      box-shadow: 0 2px 20px rgba(220, 38, 38, 0.15);
-    }
-
-    .navmenu ul li a:hover {
-      color: var(--primary-red);
-      transform: scale(1.05);
-    }
-
-    .icon-box {
-      transition: all 0.4s ease;
-      border: 2px solid transparent;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-    }
-
-    .icon-box:hover {
-      border-color: var(--primary-red);
-      box-shadow: 0 8px 20px rgba(220, 38, 38, 0.15);
-      transform: translateY(-8px);
-    }
-
-    .icon-box i {
-      color: var(--primary-red);
-      font-size: 2.5rem;
-    }
-
-    .cta-banner {
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-dark) 100%);
-      padding: 40px;
-      border-radius: 10px;
-      margin: 30px 0;
-      box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
-      animation: slideInUp 0.6s ease-out;
-    }
-
-    @keyframes slideInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-
-    .col-lg-20 {
-      flex: 0 0 20%;
-      max-width: 20%;
-    }
-
-    @media (max-width: 1200px) {
-      .col-lg-20 {
-        flex: 0 0 25%;
-        max-width: 25%;
-      }
-    }
-
-    @media (max-width: 992px) {
-      .col-lg-20 {
-        flex: 0 0 33.333%;
-        max-width: 33.333%;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .col-lg-20 {
-        flex: 0 0 50%;
-        max-width: 50%;
-      }
-
-      .member-image {
-        width: 80px;
-        height: 80px;
-      }
-
-      .member-name {
-        font-size: 0.85rem;
-      }
-
-      .member-position {
-        font-size: 0.7rem;
-      }
-
-      .sahayi-card:hover {
-        transform: translateY(-4px);
-      }
-
-      #hero::before {
-        width: 250px;
-        height: 250px;
-      }
-
-      #sahayi::before {
-        right: 20px;
-        font-size: 10px;
-        padding: 4px 12px;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .col-lg-20 {
-        flex: 0 0 100%;
-        max-width: 100%;
-      }
-    }
+    @media (max-width: 576px) { .col-lg-20 { flex: 0 0 100%; max-width: 100%; } .hero h2 { font-size: 28px; } .typed { font-size: 16px; } }
   </style>
 </head>
 
@@ -394,8 +240,9 @@
       <img src="assets/img/GECPKD IMG.png" alt="" data-aos="fade-in" class="">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <h2>SFI GECP</h2>
+        <h2 class="text-white">SFI GECP</h2>
         <p><span class="typed" data-typed-items="independence, socialism">independence</span></p>
+        <a href="./sahayi/index.html" class="btn btn-cta" aria-label="Explore Sahayi resources">Explore Sahayi →</a>
       </div>
 
     </section><!-- /Hero Section -->
@@ -429,7 +276,7 @@
         </div>
 
         <div class="row g-4">
-          <div class="col-lg-20 col-md-6 col-sm-12" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-20 col-md-6 col-sm-12" data-aos="fade-u" data-aos-delay="100">
             <div class="member-card">
               <div class="member-image">
                 <img src="assets\img\president.jpg" alt="President">
