@@ -1,0 +1,70 @@
+{
+    "committee": [
+        {
+            "id": 1,
+            "name": "COM. AJMAL V B",
+            "position": "Secretary",
+            "phone": "+917994134028",
+            "email": "sfigecpalakkad01@gmail.com",
+            "whatsapp": "+917994134028",
+            "image": "assets/img/secretary.jpg",
+            "showInContact": true,
+            "order": 1
+        },
+        {
+            "id": 2,
+            "name": "COM. BHARATH SANKAR",
+            "position": "President",
+            "phone": "+911234567890",
+            "email": "",
+            "whatsapp": "+911234567890",
+            "image": "assets/img/president.jpg",
+            "showInContact": true,
+            "order": 2
+        },
+        {
+            "id": 3,
+            "name": "COM. MEMBER NAME",
+            "position": "Joint Secretary",
+            "phone": "+911234567890",
+            "email": "asdfghj",
+            "whatsapp": "+911234567890",
+            "image": "assets/img/travel.jpg",
+            "showInContact": true,
+            "order": 3
+        },
+        {
+            "id": 4,
+            "name": "COM. MEMBER NAME",
+            "position": "Treasurer",
+            "phone": "+911234567890",
+            "email": "",
+            "whatsapp": "34456",
+            "image": "https://i0.wp.com/jimfitzpatrick.com/wp-content/uploads/2012/10/FINAL%C2%A9.VIVA-CHE1968x8.jpg?fit=1389%2C2048&ssl=1",
+            "showInContact": true,
+            "order": 4
+        },
+        {
+            "id": 5,
+            "name": "COM. MEMBER NAME",
+            "position": "Treasurer",
+            "phone": "+911234567890",
+            "email": "",
+            "whatsapp": "454566",
+            "image": "",
+            "showInContact": true,
+            "order": 4
+        },
+        {
+            "id": 6,
+            "name": "COM. MEMBER NAME",
+            "position": "Treasure",
+            "phone": "+911234567890",
+            "email": "",
+            "whatsapp": "1345",
+            "image": "",
+            "showInContact": true,
+            "order": 4
+        }
+    ]
+}
