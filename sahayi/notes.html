@@ -28,7 +28,12 @@
       background-color: #f9fafb;
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       font-family: 'Raleway', sans-serif;
       font-weight: 700;
     }
@@ -100,16 +105,28 @@
 
     .dept-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(1, 1fr);
       gap: 1.5rem;
       margin-bottom: 2rem;
     }
 
+    @media (min-width: 768px) {
+      .dept-cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
     .semester-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      grid-template-columns: repeat(1, 1fr);
       gap: 1rem;
       margin-bottom: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .semester-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     .semester-card {
@@ -206,8 +223,13 @@
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     .error-message {
@@ -243,7 +265,7 @@
       .main {
         margin-left: 300px;
       }
-      
+
       .footer-sahayi {
         margin-left: 300px;
       }
@@ -273,11 +295,10 @@
   </style>
 </head>
 
-</head>
-
 <body>
 
-  <i class="header-toggle d-xl-none bi bi-list" style="position: fixed; top: 15px; right: 15px; z-index: 9999; font-size: 22px; cursor: pointer; color: #dc2626; background: white; padding: 8px 12px; border-radius: 4px;"></i>
+  <i class="header-toggle d-xl-none bi bi-list"
+    style="position: fixed; top: 15px; right: 15px; z-index: 9999; font-size: 22px; cursor: pointer; color: #dc2626; background: white; padding: 8px 12px; border-radius: 4px;"></i>
 
   <!-- Header (Sidebar) -->
   <header id="header" class="header dark-background d-flex flex-column">
@@ -290,7 +311,8 @@
     <div class="social-links text-center">
       <a href="https://www.facebook.com/sfigecpkd" class="facebook" target="_blank"><i class="bi bi-facebook"></i></a>
       <a href="http://wa.me/+917994134028" class="whatsapp" target="_blank"><i class="bi bi-whatsapp"></i></a>
-      <a href="https://www.instagram.com/sfigecp?igsh=eHJob2MwMm16OHdo" class="instagram" target="_blank"><i class="bi bi-instagram"></i></a>
+      <a href="https://www.instagram.com/sfigecp?igsh=eHJob2MwMm16OHdo" class="instagram" target="_blank"><i
+          class="bi bi-instagram"></i></a>
     </div>
     <nav id="navmenu" class="navmenu">
       <ul>
@@ -315,7 +337,7 @@
     <div class="content-wrapper">
 
       <!-- Department Selection -->
-      <div id="deptContainer" class="visible-container">
+      <div id="deptContainer">
         <a href="./index.html" class="back-button">
           <i class="bi bi-chevron-left"></i> Back to Sahayi
         </a>
@@ -326,7 +348,7 @@
       </div>
 
       <!-- Semester Selection -->
-      <div id="semesterContainer" class="hidden-container">
+      <div id="semesterContainer" class="d-none">
         <button class="back-button" onclick="resetSelection(); return false;">
           <i class="bi bi-chevron-left"></i> Change Department
         </button>
@@ -337,9 +359,9 @@
       </div>
 
       <!-- Resources Display -->
-      <div id="resourcesContainer" class="hidden-container">
-        <button class="back-button" onclick="resetSelection(); return false;">
-          <i class="bi bi-chevron-left"></i> Choose Another Department
+      <div id="resourcesContainer" class="d-none">
+        <button class="back-button" onclick="backToSemesters(); return false;">
+          <i class="bi bi-chevron-left"></i> Back to Semesters
         </button>
         <h2 class="section-title" id="resourcesTitle">Available Resources</h2>
         <div id="resourcesList" class="resources-list">
@@ -357,7 +379,8 @@
         <div class="error-message">
           <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem;">Error Loading Resources</h3>
           <p id="errorMessage" style="margin: 0;">Failed to load study resources. Please try again.</p>
-          <button onclick="location.reload()" style="margin-top: 0.5rem; padding: 0.5rem 1rem; background: var(--primary-red); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 500;">
+          <button onclick="location.reload()"
+            style="margin-top: 0.5rem; padding: 0.5rem 1rem; background: var(--primary-red); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 500;">
             Retry
           </button>
         </div>
@@ -368,7 +391,8 @@
   </main>
 
   <!-- Footer -->
-  <footer id="footer" class="footer-sahayi" style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: white; padding: 2rem; text-align: center; margin-top: 3rem;">
+  <footer id="footer" class="footer-sahayi"
+    style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: white; padding: 2rem; text-align: center; margin-top: 3rem;">
     <div style="max-width: 1200px; margin: 0 auto;">
       <p style="margin: 0; opacity: 0.9;">&copy; 2025 SFI GEC Palakkad. All rights reserved.</p>
     </div>
@@ -385,14 +409,14 @@
     async function initPage() {
       try {
         document.getElementById('loadingState').classList.remove('hidden-container');
-        
+
         const response = await fetch('../assets/data/sahayi.json');
         if (!response.ok) throw new Error('Failed to load data');
-        
+
         allData = await response.json();
         document.getElementById('loadingState').classList.add('hidden-container');
         renderDepartments();
-        
+
       } catch (error) {
         document.getElementById('loadingState').classList.add('hidden-container');
         document.getElementById('errorState').classList.remove('hidden-container');
@@ -425,11 +449,16 @@
 
     function selectDepartment(deptId, deptName) {
       selectedDept = { id: deptId, name: deptName };
-      document.getElementById('deptContainer').classList.add('hidden-container');
-      document.getElementById('semesterContainer').classList.remove('hidden-container');
+
+      // SPA-style view replacement: hide departments, show semesters
+      document.getElementById('deptContainer').classList.add('d-none');
+      document.getElementById('semesterContainer').classList.remove('d-none');
+
       document.getElementById('semesterTitle').textContent = `${deptName} - Select Semester`;
       renderSemesters();
-      window.scrollTo(0, 0);
+
+      // Scroll to top for immediate visibility
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function renderSemesters() {
@@ -457,11 +486,15 @@
     }
 
     function selectSemester(semester) {
-      document.getElementById('semesterContainer').classList.add('hidden-container');
-      document.getElementById('resourcesContainer').classList.remove('hidden-container');
-      document.getElementById('resourcesTitle').textContent = `${selectedDept.name} - ${semester} Resources`;
+      // SPA-style view replacement: hide semesters, show resources
+      document.getElementById('semesterContainer').classList.add('d-none');
+      document.getElementById('resourcesContainer').classList.remove('d-none');
 
+      document.getElementById('resourcesTitle').textContent = `${selectedDept.name} - ${semester} Resources`;
       renderResources(semester);
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function renderResources(semester) {
@@ -474,7 +507,7 @@
       }
 
       // Filter resources by department and semester
-      const resources = allData.resources.notes.filter(r => 
+      const resources = allData.resources.notes.filter(r =>
         r.department === selectedDept.id && r.semester === semester
       );
 
@@ -491,22 +524,48 @@
         card.className = 'resource-card';
         card.style.textDecoration = 'none';
         card.innerHTML = `
-          <div class="resource-title">${resource.title}</div>
-          <p style="font-size: 0.9rem; color: #666; margin: 0.5rem 0;">${resource.description || ''}</p>
-          <a href="${resource.gdrive_url || resource.link || '#'}" target="_blank" class="resource-link">
-            <i class="bi bi-download"></i> Open Resource
-          </a>
+          <div class="card border-0 shadow-sm rounded-3 border-start border-danger border-4" 
+               style="transition: all 0.3s ease;">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="flex-grow-1">
+                  <h5 class="card-title fw-bold text-dark mb-2">
+                    ${resource.title}
+                  </h5>
+                  <p class="card-text text-muted small mb-0">
+                    Click to open in Google Drive
+                  </p>
+                </div>
+                <div class="ms-3">
+                  <i class="bi bi-box-arrow-up-right text-danger fs-5"></i>
+                </div>
+              </div>
+            </div>
+          </div>
         `;
         container.appendChild(card);
       });
     }
 
+    function backToSemesters() {
+      // SPA-style view replacement: hide resources, show semesters
+      document.getElementById('resourcesContainer').classList.add('d-none');
+      document.getElementById('semesterContainer').classList.remove('d-none');
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     function resetSelection() {
       selectedDept = null;
-      document.getElementById('deptContainer').classList.remove('hidden-container');
-      document.getElementById('semesterContainer').classList.add('hidden-container');
-      document.getElementById('resourcesContainer').classList.add('hidden-container');
-      window.scrollTo(0, 0);
+
+      // SPA-style view replacement: show departments, hide others
+      document.getElementById('deptContainer').classList.remove('d-none');
+      document.getElementById('semesterContainer').classList.add('d-none');
+      document.getElementById('resourcesContainer').classList.add('d-none');
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // Initialize on page load
@@ -516,7 +575,7 @@
     const headerToggle = document.querySelector('.header-toggle');
     const header = document.getElementById('header');
     const navLinks = document.querySelectorAll('.navmenu a');
-    
+
     if (headerToggle) {
       headerToggle.addEventListener('click', () => {
         header.classList.toggle('header-show');

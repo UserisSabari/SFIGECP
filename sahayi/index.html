@@ -28,7 +28,12 @@
       background-color: #f9fafb;
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       font-family: 'Raleway', sans-serif;
       font-weight: 700;
     }
@@ -38,7 +43,7 @@
       .main {
         margin-left: 300px;
       }
-      
+
       .footer-sahayi {
         margin-left: 300px;
       }
@@ -54,6 +59,7 @@
     .hero-sahayi h1 {
       font-size: 3rem;
       margin-bottom: 1rem;
+      color: white;
     }
 
     .hero-sahayi p {
@@ -200,7 +206,8 @@
 
 <body>
 
-  <i class="header-toggle d-xl-none bi bi-list" style="position: fixed; top: 15px; right: 15px; z-index: 9999; font-size: 22px; cursor: pointer; color: #dc2626; background: white; padding: 8px 12px; border-radius: 4px;"></i>
+  <i class="header-toggle d-xl-none bi bi-list"
+    style="position: fixed; top: 15px; right: 15px; z-index: 9999; font-size: 22px; cursor: pointer; color: #dc2626; background: white; padding: 8px 12px; border-radius: 4px;"></i>
 
   <!-- Header (Sidebar) -->
   <header id="header" class="header dark-background d-flex flex-column">
@@ -213,7 +220,8 @@
     <div class="social-links text-center">
       <a href="https://www.facebook.com/sfigecpkd" class="facebook" target="_blank"><i class="bi bi-facebook"></i></a>
       <a href="http://wa.me/+917994134028" class="whatsapp" target="_blank"><i class="bi bi-whatsapp"></i></a>
-      <a href="https://www.instagram.com/sfigecp?igsh=eHJob2MwMm16OHdo" class="instagram" target="_blank"><i class="bi bi-instagram"></i></a>
+      <a href="https://www.instagram.com/sfigecp?igsh=eHJob2MwMm16OHdo" class="instagram" target="_blank"><i
+          class="bi bi-instagram"></i></a>
     </div>
     <nav id="navmenu" class="navmenu">
       <ul>
@@ -291,7 +299,8 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer-sahayi" style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: white; padding: 2rem; text-align: center; margin-top: 3rem;">
+  <footer class="footer-sahayi"
+    style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: white; padding: 2rem; text-align: center; margin-top: 3rem;">
     <div style="max-width: 1200px; margin: 0 auto;">
       <p style="margin: 0; opacity: 0.9;">&copy; 2025 SFI GEC Palakkad. All rights reserved.</p>
     </div>
@@ -306,7 +315,7 @@
     const headerToggle = document.querySelector('.header-toggle');
     const header = document.getElementById('header');
     const navLinks = document.querySelectorAll('.navmenu a');
-    
+
     if (headerToggle) {
       headerToggle.addEventListener('click', () => {
         header.classList.toggle('header-show');
@@ -337,8 +346,8 @@
 
 </html>
 
-  <!-- Footer -->
-  <!-- <footer class="footer-sahayi" style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: white; padding: 2rem; text-align: center; margin-top: 3rem;">
+<!-- Footer -->
+<!-- <footer class="footer-sahayi" style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: white; padding: 2rem; text-align: center; margin-top: 3rem;">
     <p>&copy; 2025 SFI GEC Palakkad. All rights reserved.</p>
   </footer>
 
