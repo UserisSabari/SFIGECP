@@ -521,28 +521,36 @@
         card.href = resource.gdrive_url || resource.link || '#';
         card.target = '_blank';
         card.rel = 'noopener noreferrer';
-        card.className = 'resource-card';
-        card.style.textDecoration = 'none';
+        card.className = 'text-decoration-none d-block mb-3 p-3 bg-white rounded-3 shadow-sm border-start border-danger border-4';
+        card.style.cssText = 'transition: all 0.3s ease;';
+
         card.innerHTML = `
-          <div class="card border-0 shadow-sm rounded-3 border-start border-danger border-4" 
-               style="transition: all 0.3s ease;">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-start">
-                <div class="flex-grow-1">
-                  <h5 class="card-title fw-bold text-dark mb-2">
-                    ${resource.title}
-                  </h5>
-                  <p class="card-text text-muted small mb-0">
-                    Click to open in Google Drive
-                  </p>
-                </div>
-                <div class="ms-3">
-                  <i class="bi bi-box-arrow-up-right text-danger fs-5"></i>
-                </div>
-              </div>
+          <div class="d-flex justify-content-between align-items-start">
+            <div class="flex-grow-1">
+              <h5 class="fw-bold text-dark mb-2">
+                ${resource.title}
+              </h5>
+              <p class="text-muted small mb-0">
+                Click to open in Google Drive
+              </p>
+            </div>
+            <div class="ms-3">
+              <i class="bi bi-box-arrow-up-right text-danger fs-5"></i>
             </div>
           </div>
         `;
+
+        // Hover effect
+        card.addEventListener('mouseenter', () => {
+          card.style.transform = 'translateY(-4px)';
+          card.style.boxShadow = '0 0.5rem 1rem rgba(0, 0, 0, 0.15)';
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'translateY(0)';
+          card.style.boxShadow = '';
+        });
+
         container.appendChild(card);
       });
     }

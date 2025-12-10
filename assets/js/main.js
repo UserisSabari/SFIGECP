@@ -65,13 +65,16 @@
       window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
     }
   }
-  scrollTop.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+
+  if (scrollTop) {
+    scrollTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
-  });
+  }
 
   window.addEventListener('load', toggleScrollTop);
   document.addEventListener('scroll', toggleScrollTop);
@@ -90,17 +93,27 @@
   window.addEventListener('load', aosInit);
 
   /**
-   * Init typed.js
+   * Init typed.js with retry mechanism
    */
-  function initTyped() {
-    const selectTyped = document.querySelector('.typed');
-    if (selectTyped) {
-      let typed_strings = selectTyped.getAttribute('data-typed-items');
-      if (typed_strings) {
-        typed_strings = typed_strings.split(',').map(s => s.trim());
+  let typedInitialized = false; // Flag to prevent multiple initializations
 
-        // Check if Typed is available
-        if (typeof Typed !== 'undefined') {
+  function initTyped() {
+    if (typedInitialized) return; // Already initialized
+
+    const selectTyped = document.querySelector('.typed');
+    if (!selectTyped) return;
+
+    let typed_strings = selectTyped.getAttribute('data-typed-items');
+    if (!typed_strings) return;
+
+    typed_strings = typed_strings.split(',').map(s => s.trim());
+
+    // Retry mechanism to ensure Typed.js is loaded
+    const attemptInit = (retries = 0) => {
+      if (typedInitialized) return; // Already initialized
+
+      if (typeof Typed !== 'undefined') {
+        try {
           new Typed('.typed', {
             strings: typed_strings,
             loop: true,
@@ -110,13 +123,24 @@
             showCursor: true,
             cursorChar: '|'
           });
+          typedInitialized = true; // Mark as initialized
+        } catch (error) {
+          // Silent fail
         }
+      } else if (retries < 10) {
+        setTimeout(() => attemptInit(retries + 1), 100);
       }
-    }
+    };
+
+    attemptInit();
   }
 
-  // Wait for window load to ensure all scripts are loaded
-  window.addEventListener('load', initTyped);
+  // Single initialization on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTyped);
+  } else {
+    initTyped();
+  }
 
   /**
    * Initiate Pure Counter

@@ -383,8 +383,14 @@ window.addEventListener('offline', () => {
   }
 });
 
-// Initialize on DOM load
+// Initialize on DOM load - only on Sahayi pages
 document.addEventListener('DOMContentLoaded', async () => {
+  // Check if we're on a Sahayi page by looking for specific elements
+  const sahayiContainer = document.getElementById('deptContainer') ||
+    document.querySelector('.hero-sahayi');
+
+  if (!sahayiContainer) return; // Exit if not on a Sahayi page
+
   const navigator = new SahayiNavigator('../assets/data/sahayi.json');
   await navigator.init();
   window.sahayiNavigator = navigator;
