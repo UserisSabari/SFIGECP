@@ -23,7 +23,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/sfi-gec-palakkad.git"
+    "url": "https://github.com/sfigecpalakkad/SFIGECP.git"
   },
   "devDependencies": {
     "live-server": "^1.2.2"

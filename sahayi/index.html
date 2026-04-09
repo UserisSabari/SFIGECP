@@ -311,46 +311,11 @@
   </footer>
 
   <!-- Scripts -->
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/data-controller.js"></script>
   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/main.js"></script>
-
-  <script>
-    // Mobile menu toggle
-    const headerToggle = document.querySelector('.header-toggle');
-    const header = document.getElementById('header');
-    const navLinks = document.querySelectorAll('.navmenu a');
-
-    if (headerToggle) {
-      headerToggle.addEventListener('click', () => {
-        header.classList.toggle('header-show');
-      });
-    }
-
-    // Close menu on nav link click
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        header.classList.remove('header-show');
-      });
-
-      // Mark Sahayi link as active
-      if (link.textContent.includes('Sahayi') && window.location.pathname.includes('/sahayi/')) {
-        link.classList.add('active');
-      }
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!header.contains(e.target) && !headerToggle.contains(e.target)) {
-        header.classList.remove('header-show');
-      }
-    });
-  </script>
-
-  <!-- Bootstrap Bundle JS (includes Popper) -->
-  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Main JS for mobile menu functionality -->
-  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/sahayi.js"></script>
 
 </body>
 

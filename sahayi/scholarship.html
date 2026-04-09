@@ -387,98 +387,17 @@
   </footer>
 
   <!-- Scripts -->
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/data-controller.js"></script>
+  <script src="../assets/js/sahayi-loader.js"></script>
   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/main.js"></script>
 
   <script>
-    let allData = null;
-
-    async function initPage() {
-      try {
-        document.getElementById('loadingState').classList.remove('hidden-container');
-
-        const response = await fetch('../assets/data/sahayi.json');
-        if (!response.ok) throw new Error('Failed to load data');
-
-        allData = await response.json();
-        document.getElementById('loadingState').classList.add('hidden-container');
-
-        // Hide department and semester containers
-        document.getElementById('deptContainer').classList.add('hidden-container');
-        document.getElementById('semesterContainer').classList.add('hidden-container');
-
-        // Show scholarships directly
-        document.getElementById('resourcesContainer').classList.remove('hidden-container');
-        document.getElementById('resourcesTitle').textContent = 'Available Scholarships';
-        renderScholarships();
-
-      } catch (error) {
-        document.getElementById('loadingState').classList.add('hidden-container');
-        document.getElementById('errorState').classList.remove('hidden-container');
-        document.getElementById('errorMessage').textContent = error.message || 'Failed to load scholarships';
-      }
-    }
-
-    function renderScholarships() {
-      const container = document.getElementById('resourcesList');
-      container.innerHTML = '';
-
-      if (!allData.scholarships || allData.scholarships.length === 0) {
-        container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: #666;">No scholarships available at the moment. Please check back later!</p>';
-        return;
-      }
-
-      allData.scholarships.forEach(scholarship => {
-        const card = document.createElement('a');
-        card.href = scholarship.link || '#';
-        card.target = '_blank';
-        card.rel = 'noopener noreferrer';
-        card.className = 'resource-card';
-        card.style.textDecoration = 'none';
-        card.innerHTML = `
-          <div class="resource-title">${scholarship.title}</div>
-          <p style="font-size: 0.9rem; color: #666; margin: 0.5rem 0;">${scholarship.description || ''}</p>
-          <span class="resource-link">
-            <i class="bi bi-link-45deg"></i> Learn More
-          </span>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    // Initialize on page load
-    window.addEventListener('DOMContentLoaded', initPage);
-
-    // Mobile menu toggle
-    const headerToggle = document.querySelector('.header-toggle');
-    const header = document.getElementById('header');
-    const navLinks = document.querySelectorAll('.navmenu a');
-
-    if (headerToggle) {
-      headerToggle.addEventListener('click', () => {
-        header.classList.toggle('header-show');
-      });
-    }
-
-    // Close menu on nav link click and mark Sahayi link as active
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        header.classList.remove('header-show');
-      });
-
-      // Mark Sahayi link as active
-      if (link.textContent.includes('Sahayi') && window.location.pathname.includes('/sahayi/')) {
-        link.classList.add('active');
-      }
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!header.contains(e.target) && !headerToggle.contains(e.target)) {
-        header.classList.remove('header-show');
-      }
-    });
+    // Initialize specifically for 'scholarships'
+    window.addEventListener('DOMContentLoaded', () => initSahayiPage('scholarships'));
   </script>
+
 
 </body>
 
