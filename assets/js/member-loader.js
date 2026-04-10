@@ -53,7 +53,7 @@ function renderUnitCommittee(members) {
 
     container.innerHTML = ''; // Clear placeholders
     committeeMembers.forEach((member, index) => {
-        const card = createMemberCard(member, index, 'col-lg-20 col-md-6 col-sm-12');
+        const card = createMemberCard(member, index, 'col-lg-6 col-md-6 col-sm-12');
         container.innerHTML += card;
     });
 }
@@ -84,7 +84,7 @@ function createMemberCard(member, index, bootstrapClass) {
         <div class="${bootstrapClass}" data-aos="fade-up" data-aos-delay="${100 + (index * 50)}">
             <div class="member-card">
                 <div class="member-image">
-                    ${member.image ? `<img src="${member.image}" alt="${member.name}">` : `<i class="bi bi-person-circle" style="font-size: 3rem; color: white !important;"></i>`}
+                    ${member.image ? `<img src="${member.image}" alt="Portrait of ${member.name}">` : `<i class="bi bi-person-circle" style="font-size: 3rem; color: white !important;"></i>`}
                 </div>
                 <p class="member-position">${member.position}</p>
                 <h3 class="member-name">${member.name}</h3>

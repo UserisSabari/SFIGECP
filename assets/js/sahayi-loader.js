@@ -163,16 +163,16 @@ function renderResources(semester) {
  */
 function renderGlobalScholarships() {
     const container = document.getElementById('resourcesList');
-    if (!container || !allData.scholarships) return;
+    if (!container || !allData.resources || !allData.resources.scholarships) return;
 
     container.innerHTML = '';
     
-    if (allData.scholarships.length === 0) {
+    if (allData.resources.scholarships.length === 0) {
         container.innerHTML = '<p class="text-center text-muted my-5">No scholarships available at the moment. Please check back later!</p>';
         return;
     }
 
-    allData.scholarships.forEach(s => {
+    allData.resources.scholarships.forEach(s => {
         const card = document.createElement('a');
         card.href = s.link || '#';
         card.target = '_blank';
